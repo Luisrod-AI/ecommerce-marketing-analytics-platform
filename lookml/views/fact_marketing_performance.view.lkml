@@ -51,8 +51,8 @@ view: fact_marketing_performance {
   dimension: campaign_status {
     type: string
     sql: CASE 
-      WHEN ${activity_date} >= CURRENT_DATE() - 7 THEN 'active'
-      WHEN ${activity_date} >= CURRENT_DATE() - 30 THEN 'recent'
+      WHEN DATE(${activity_raw}) >= CURRENT_DATE() - 7 THEN 'active'
+      WHEN DATE(${activity_raw}) >= CURRENT_DATE() - 30 THEN 'recent'
       ELSE 'inactive'
     END ;;
     description: "Campaign status based on activity"

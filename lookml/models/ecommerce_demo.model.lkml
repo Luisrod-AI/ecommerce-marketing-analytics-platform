@@ -7,7 +7,7 @@ connection: "ra_dw_prod"
 
 # Project configurations
 include: "../views/*.view.lkml"
-# include: "/dashboards/*.dashboard.lookml"
+include: "../dashboards/*.dashboard.lookml"
 
 datagroup: ra_ecommerce_default_datagroup {
   sql_trigger: SELECT MAX(last_updated) FROM `ra-development.analytics_ecommerce_ecommerce.fact_data_quality` ;;
@@ -161,7 +161,7 @@ explore: marketing_performance {
   join: activity_date {
     from: dim_date
     type: left_outer
-    sql_on: ${marketing_performance.activity_date} = ${activity_date.date_actual_date} ;;
+    sql_on: DATE(${marketing_performance.activity_raw}) = ${activity_date.date_actual_date} ;;
     relationship: many_to_one
     fields: [activity_date.date_actual_date, activity_date.date_actual_week, activity_date.date_actual_month, 
              activity_date.date_actual_quarter, activity_date.date_actual_year, activity_date.date_actual_day_of_week, 
@@ -312,6 +312,49 @@ explore: customer_metrics {
 }
 
 # Attribution Analysis Explore
+# Attribution Analysis Explore (alias for fact_customer_journey)
+explore: attribution_analysis {
+  from: fact_customer_journey
+  label: "Attribution Analysis"
+  description: "Multi-touch attribution and customer journey analysis"
+  
+  # Date dimension for attribution
+  join: attribution_date {
+    from: dim_date
+    type: left_outer
+    sql_on: ${attribution_analysis.session_date_key} = ${attribution_date.date_key} ;;
+    relationship: many_to_one
+    fields: [attribution_date.date_actual_date, attribution_date.date_actual_week, 
+             attribution_date.date_actual_month, attribution_date.date_actual_quarter, 
+             attribution_date.date_actual_year, attribution_date.calendar_date]
+  }
+  
+  # Channel dimension for touchpoints
+  join: touchpoint_channels {
+    from: dim_channels
+    type: left_outer
+    sql_on: ${attribution_analysis.channel_key} = ${touchpoint_channels.channel_key} ;;
+    relationship: many_to_one
+  }
+  
+  # Customer dimension
+  join: customers {
+    from: dim_customers
+    type: left_outer
+    sql_on: ${attribution_analysis.customer_key} = ${customers.customer_key} ;;
+    relationship: many_to_one
+  }
+  
+  # Order dimension
+  join: orders {
+    from: fact_orders
+    type: left_outer
+    sql_on: ${attribution_analysis.order_key} = ${orders.order_key} ;;
+    relationship: many_to_one
+  }
+}
+
+# Customer Journey Explore (keep for backward compatibility)
 explore: fact_customer_journey {
   label: "Attribution Analysis"
   description: "Multi-touch attribution and customer journey analysis"
@@ -386,7 +429,7 @@ explore: executive_overview {
   join: exec_marketing {
     from: fact_marketing_performance
     type: left_outer
-    sql_on: ${exec_order_date.date_actual_date} = ${exec_marketing.activity_date} ;;
+    sql_on: ${exec_order_date.date_actual_date} = DATE(${exec_marketing.activity_raw}) ;;
     relationship: many_to_many
   }
   

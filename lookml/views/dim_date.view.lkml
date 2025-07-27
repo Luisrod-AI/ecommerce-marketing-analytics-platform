@@ -13,7 +13,7 @@ view: dim_date {
   dimension_group: date_actual {
     type: time
     timeframes: [raw, date, week, month, quarter, year, day_of_week, day_of_month, day_of_year]
-    datatype: datetime
+    datatype: timestamp
     sql: ${TABLE}.date_actual ;;
     description: "Calendar date"
   }

@@ -336,10 +336,10 @@
   - title: Channel Attribution Mix
     name: channel_attribution_mix
     model: ecommerce_demo
-    explore: fact_customer_journey
+    explore: attribution_analysis
     type: looker_pie
-    fields: [touchpoint_channels.channel_name, fact_customer_journey.total_revenue]
-    sorts: [fact_customer_journey.total_revenue desc]
+    fields: [touchpoint_channels.channel_name, attribution_analysis.total_revenue]
+    sorts: [attribution_analysis.total_revenue desc]
     limit: 10
     value_labels: legend
     label_type: labPer
