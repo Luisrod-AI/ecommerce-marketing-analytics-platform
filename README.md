@@ -18,6 +18,7 @@ A comprehensive dbt project for building a modern ecommerce data warehouse with 
 - [Testing](#testing)
 - [Data Quality Monitoring](#data-quality-monitoring)
 - [Documentation](#documentation)
+- [Looker LookML Analytics Layer](#-looker-lookml-analytics-layer)
 - [Project Structure](#project-structure)
 - [Models Overview](#models-overview)
 - [Business Use Cases](#business-use-cases)
@@ -25,12 +26,13 @@ A comprehensive dbt project for building a modern ecommerce data warehouse with 
 
 ## 🎯 Overview
 
-The Ra Ecommerce Data Warehouse v2 is a starter dbt project that integrates data from multiple ecommerce and marketing platforms to provide comprehensive business intelligence and analytics capabilities. The warehouse follows best practices for data modeling, includes extensive data quality monitoring, and provides pre-built analytics for common ecommerce use cases.
+The Ra Ecommerce Data Warehouse v2 is a comprehensive analytics solution that combines a dbt data transformation project with a complete Looker LookML implementation. It integrates data from multiple ecommerce and marketing platforms to provide enterprise-grade business intelligence and analytics capabilities. The warehouse follows best practices for data modeling, includes extensive data quality monitoring, and provides pre-built analytics for common ecommerce use cases.
 
 ### Key Features
 
 - **Multi-Source Integration**: Shopify, Google Analytics 4, Google/Facebook/Pinterest Ads, Klaviyo, Instagram Business
 - **Layered Architecture**: Staging → Integration → Warehouse with clear separation of concerns
+- **Looker LookML Layer**: 16 views, 12 explores, and 3 production-ready dashboards
 - **Data Quality Monitoring**: Comprehensive pipeline health tracking and data quality metrics
 - **Attribution Analysis**: Multi-touch customer journey attribution across all touchpoints
 - **Performance Analytics**: Campaign performance, customer segmentation, product analytics
@@ -368,6 +370,90 @@ See [`docs/user_guide.md`](docs/user_guide.md) for:
 - Visualization specifications
 - Dashboard creation guidance
 
+## 🔍 Looker LookML Analytics Layer
+
+The project includes a complete Looker LookML implementation that provides a self-service analytics layer on top of the data warehouse.
+
+### LookML Features
+
+- **16 View Files**: Comprehensive coverage of all fact and dimension tables
+- **12 Explores**: Pre-configured analysis paths for different business use cases
+- **3 Production-Ready Dashboards**: Executive, Sales, and Data Quality monitoring
+- **Advanced Analytics**: Multi-touch attribution, cohort analysis, and predictive metrics
+
+### Looker Dashboards
+
+#### 1. Executive Overview Dashboard
+![Executive Overview Dashboard](docs/img/executive_overview_dashboard.png)
+
+**Purpose**: C-level business performance monitoring with real-time KPIs and trends
+
+**Key Features**:
+- 6 primary KPIs: Revenue, Orders, AOV, Customers, CAC, ROAS
+- Revenue trend analysis with period comparisons
+- Channel performance breakdown
+- Marketing efficiency tracking (spend vs revenue)
+- Website conversion funnel visualization
+
+#### 2. Sales & Orders Analytics Dashboard
+![Sales Orders Analytics Dashboard](docs/img/sales_orders_analytics_dashboard.png)
+
+**Purpose**: Deep-dive sales analysis for operations and product teams
+
+**Key Features**:
+- Sales performance with YoY comparisons
+- Product performance rankings
+- Customer segmentation analysis
+- Geographic distribution maps
+- Order status and fulfillment tracking
+
+#### 3. Data Quality Monitoring Dashboard
+![Data Quality Monitoring Dashboard](docs/img/data_quality_monitoring_dashboard.png)
+
+**Purpose**: Real-time data pipeline health monitoring and quality assurance
+
+**Key Features**:
+- Overall test pass rate (97.8%)
+- Pipeline health scores by data source
+- Data flow efficiency metrics
+- Error and warning tracking
+- Source data volume monitoring
+
+### LookML Project Structure
+
+```
+lookml/
+├── models/
+│   └── ecommerce_demo.model.lkml    # Main model with explores
+├── views/
+│   ├── dim_*.view.lkml              # Dimension views
+│   └── fact_*.view.lkml             # Fact table views
+└── dashboards/
+    ├── executive_overview.dashboard.lookml
+    ├── sales_orders_analytics.dashboard.lookml
+    └── data_quality_monitoring.dashboard.lookml
+```
+
+### Getting Started with Looker
+
+1. **Deploy LookML Project**:
+   ```bash
+   # Clone the lookml directory to your Looker instance
+   # Configure connection to BigQuery as 'ra_dw_prod'
+   ```
+
+2. **Access Dashboards**:
+   - Navigate to Looker → Dashboards
+   - Select from Executive Overview, Sales Analytics, or Data Quality
+   - Use date filters to adjust reporting periods
+
+3. **Explore Data**:
+   - Use any of the 12 pre-built explores
+   - Build custom reports and visualizations
+   - Schedule automated delivery of dashboards
+
+For detailed LookML documentation, see [`docs/lookml-project-documentation.md`](docs/lookml-project-documentation.md).
+
 ## 📁 Project Structure
 
 ```
@@ -376,10 +462,22 @@ ra_warehouse_ecommerce_v2/
 ├── packages.yml                 # dbt package dependencies  
 ├── README.md                    # This file
 ├── docs/
-│   └── user_guide.md           # Business user documentation
+│   ├── user_guide.md           # Business user documentation
+│   ├── lookml-project-documentation.md  # LookML implementation guide
+│   └── img/                    # Dashboard screenshots
+├── lookml/                      # Looker LookML project
+│   ├── models/
+│   │   └── ecommerce_demo.model.lkml
+│   ├── views/
+│   │   ├── dim_*.view.lkml    # Dimension views
+│   │   └── fact_*.view.lkml   # Fact table views
+│   └── dashboards/
+│       ├── executive_overview.dashboard.lookml
+│       ├── sales_orders_analytics.dashboard.lookml
+│       └── data_quality_monitoring.dashboard.lookml
 ├── seeds/                       # Demo/reference data
-│   ├── shopify_demo/           # Shopify seed data
-│   ├── ga4_demo/               # GA4 seed data  
+│   ├── shopify/                # Shopify seed data
+│   ├── ga4/                    # GA4 seed data  
 │   ├── google_ads/             # Google Ads seed data
 │   ├── facebook_ads/           # Facebook Ads seed data
 │   └── klaviyo/                # Email marketing seed data
