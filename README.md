@@ -1,4 +1,4 @@
-# Ra Ecommerce Data Warehouse v2
+# RA Warehouse for eCommerce (v2)
 
 A comprehensive dbt project for building a modern ecommerce data warehouse with multi-source integration, advanced analytics, and data quality monitoring.
 
@@ -6,7 +6,7 @@ A comprehensive dbt project for building a modern ecommerce data warehouse with 
 [![BigQuery](https://img.shields.io/badge/BigQuery-Supported-blue.svg)](https://cloud.google.com/bigquery)
 [![Data Sources](https://img.shields.io/badge/Data%20Sources-8-green.svg)](#data-sources)
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Data Sources](#data-sources)
@@ -24,7 +24,7 @@ A comprehensive dbt project for building a modern ecommerce data warehouse with 
 - [Business Use Cases](#business-use-cases)
 - [Contributing](#contributing)
 
-## 🎯 Overview
+## Overview
 
 The Ra Ecommerce Data Warehouse v2 is a comprehensive analytics solution that combines a dbt data transformation project with a complete Looker LookML implementation. It integrates data from multiple ecommerce and marketing platforms to provide enterprise-grade business intelligence and analytics capabilities. The warehouse follows best practices for data modeling, includes extensive data quality monitoring, and provides pre-built analytics for common ecommerce use cases.
 
@@ -40,7 +40,7 @@ The Ra Ecommerce Data Warehouse v2 is a comprehensive analytics solution that co
 - **Comprehensive Testing**: 100+ data tests for data integrity and business rules
 - **Documentation**: Full column-level documentation and business context
 
-## 📊 Data Sources
+## Data Sources
 
 | Source | Purpose | Tables | Status |
 |--------|---------|--------|--------|
@@ -52,7 +52,7 @@ The Ra Ecommerce Data Warehouse v2 is a comprehensive analytics solution that co
 | **Klaviyo** | Email marketing | Campaigns, Events, People | ✅ Active |
 | **Instagram Business** | Social media content | Posts, Media Insights | ✅ Active |
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -81,7 +81,7 @@ The Ra Ecommerce Data Warehouse v2 is a comprehensive analytics solution that co
 - **Integration**: Business logic application, cross-source joins, and metric calculations  
 - **Warehouse**: Dimensional modeling with facts and dimensions optimized for analytics
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -152,7 +152,7 @@ dbt docs generate
 dbt docs serve
 ```
 
-## 💾 Data Loading
+## Data Loading
 
 ### Using Seed Data (Demo/Development)
 
@@ -199,7 +199,7 @@ sources:
       - name: product
 ```
 
-## 🏃‍♂️ Running the Project
+## 🏃‍♂Running the Project
 
 ### Basic Commands
 
@@ -255,7 +255,7 @@ dbt test
 dbt run --select "wh_fact_data_quality"
 ```
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive testing at all layers:
 
@@ -295,7 +295,7 @@ dbt test --store-failures
 - **Data Quality Metrics**: Validates pipeline health scores are within ranges
 - **Business Rules**: Customer segments, product performance tiers, etc.
 
-## 📊 Data Quality Monitoring
+## Data Quality Monitoring
 
 ### Pipeline Health Dashboard
 
@@ -342,7 +342,7 @@ dbt run --select "wh_fact_data_quality"
 dbt test --select "fact_data_quality"
 ```
 
-## 📚 Documentation
+## Documentation
 
 ### Generate Documentation
 
@@ -370,7 +370,7 @@ See [`docs/user_guide.md`](docs/user_guide.md) for:
 - Visualization specifications
 - Dashboard creation guidance
 
-## 🔍 Looker LookML Analytics Layer
+## Looker LookML Analytics Layer
 
 The project includes a complete Looker LookML implementation that provides a self-service analytics layer on top of the data warehouse.
 
@@ -511,7 +511,7 @@ ra_warehouse_ecommerce_v2/
 └── tests/                      # Custom SQL tests
 ```
 
-## 🎯 Models Overview
+## Models Overview
 
 ### Staging Models (stg_)
 Clean and standardize raw data with basic validation:
@@ -553,7 +553,7 @@ Dimensional model optimized for analytics:
 - **fact_social_posts**: Social media content performance
 - **fact_data_quality**: Pipeline health and data quality monitoring
 
-## 💼 Business Use Cases
+## Business Use Cases
 
 The warehouse supports 9 comprehensive business use cases:
 
@@ -569,7 +569,7 @@ The warehouse supports 9 comprehensive business use cases:
 
 See [`docs/user_guide.md`](docs/user_guide.md) for detailed queries and visualization specifications.
 
-## 🔧 Configuration
+## Configuration
 
 ### Key Configuration Files
 
@@ -599,7 +599,7 @@ export DBT_SOURCE_FRESHNESS_ERROR_AFTER="24 hours"
 - **Warehouse**: Tables (for BI tool performance)
 - **Large Facts**: Incremental (for production scale)
 
-## 🤝 Contributing
+## Contributing
 
 ### Development Workflow
 
@@ -632,14 +632,8 @@ export DBT_SOURCE_FRESHNESS_ERROR_AFTER="24 hours"
 - **Performance**: Use `dbt run --threads <n>` to adjust parallelism
 - **Debugging**: Use `dbt --log-level debug` for detailed logging
 
-## 📄 License & Copyright
+## License & Copyright
 
 **Copyright © 2025 Rittman Analytics. All rights reserved.**
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-**Built with ❤️ using dbt and BigQuery**
-
-*Ready to transform your ecommerce data into actionable insights!*
