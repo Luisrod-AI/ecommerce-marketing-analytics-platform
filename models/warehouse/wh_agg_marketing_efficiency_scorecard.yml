@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: wh_agg_marketing_efficiency_scorecard
+    description: >
+      Daily marketing efficiency scorecard by platform, channel category,
+      and marketing type. The model compares each channel's share of revenue
+      against its share of marketing spend to identify over- and
+      under-performing channels.
+
+    columns:
+      - name: activity_date
+        description: Date associated with the marketing activity.
+        data_tests:
+          - not_null
+
+      - name: platform
+        description: Marketing or advertising platform.
+        data_tests:
+          - not_null
+
+      - name: channel_category
+        description: High-level marketing channel classification.
+
+      - name: marketing_type
+        description: Type of marketing activity.
+
+      - name: impressions
+        description: Total number of impressions generated.
+
+      - name: clicks
+        description: Total number of clicks generated.
+
+      - name: conversions
+        description: Total attributed conversions.
+
+      - name: total_interactions
+        description: Total recorded marketing interactions.
+
+      - name: spend
+        description: Total marketing spend.
+
+      - name: revenue
+        description: Total attributed revenue.
+
+      - name: net_marketing_revenue
+        description: Revenue minus marketing spend.
+
+      - name: roas
+        description: Revenue divided by marketing spend.
+
+      - name: cost_per_acquisition
+        description: Marketing spend divided by attributed conversions.
+
+      - name: cost_per_click
+        description: Marketing spend divided by clicks.
+
+      - name: click_through_rate
+        description: Clicks divided by impressions.
+
+      - name: click_to_conversion_rate
+        description: Conversions divided by clicks.
+
+      - name: marketing_margin_pct
+        description: Marketing contribution after spend as a percentage of revenue.
+
+      - name: spend_share
+        description: Channel spend as a share of total daily marketing spend.
+
+      - name: revenue_share
+        description: Channel attributed revenue as a share of total daily attributed revenue.
+
+      - name: efficiency_index
+        description: >
+          Revenue share divided by spend share. Values above 1 indicate
+          the channel generates a larger share of revenue than its share
+          of marketing spend.
+
+      - name: efficiency_status
+        description: Business classification derived from the efficiency index.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Organic / Earned
+                  - Highly Efficient
+                  - Efficient
+                  - Needs Attention
+                  - Inefficient
+                  - Not Applicable
+
+      - name: created_at
+        description: Timestamp when the model was generated.
